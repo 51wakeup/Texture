@@ -521,9 +521,11 @@ static void *ASVideoPlayerNodeContext = &ASVideoPlayerNodeContext;
     [_delegate videoPlayerNode:self willChangeVideoNodeState:state toVideoNodeState:toState];
   }
 
+   //先简单修复下，这里回调不走ASVideoNodePlayerStateReadyToPlay，应该是asvideonode的bug
+   _duration = _videoNode.currentItem.duration;
+  [self updateDurationTimeLabel];
   if (toState == ASVideoNodePlayerStateReadyToPlay) {
-    _duration = _videoNode.currentItem.duration;
-    [self updateDurationTimeLabel];
+    
   }
 
   if (toState == ASVideoNodePlayerStatePlaying) {
